@@ -1397,7 +1397,7 @@ Total variance ditangkap: 95.03%
 <span class="n">X_low_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_low</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"PC</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_low</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
 <span class="n">X_low_df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"id"</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran matriks tereduksi:"</span><span class="p">,</span> <span class="n">X_low_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">X_low_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">X_low_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1436,22 +1436,6 @@ Total variance ditangkap: 95.03%
 <th>PC2</th>
 <th>PC3</th>
 <th>PC4</th>
-<th>PC5</th>
-<th>PC6</th>
-<th>PC7</th>
-<th>PC8</th>
-<th>PC9</th>
-<th>...</th>
-<th>PC160</th>
-<th>PC161</th>
-<th>PC162</th>
-<th>PC163</th>
-<th>PC164</th>
-<th>PC165</th>
-<th>PC166</th>
-<th>PC167</th>
-<th>PC168</th>
-<th>PC169</th>
 </tr>
 </thead>
 <tbody>
@@ -1462,22 +1446,6 @@ Total variance ditangkap: 95.03%
 <td>-0.067612</td>
 <td>-0.073233</td>
 <td>0.008429</td>
-<td>0.000285</td>
-<td>-0.042209</td>
-<td>-0.009882</td>
-<td>0.198657</td>
-<td>0.090578</td>
-<td>...</td>
-<td>-0.003116</td>
-<td>0.025859</td>
-<td>0.061726</td>
-<td>0.031649</td>
-<td>0.002077</td>
-<td>0.055614</td>
-<td>0.143353</td>
-<td>0.045036</td>
-<td>-0.017588</td>
-<td>0.033296</td>
 </tr>
 <tr>
 <th>1</th>
@@ -1486,22 +1454,6 @@ Total variance ditangkap: 95.03%
 <td>-0.045809</td>
 <td>-0.042766</td>
 <td>0.006199</td>
-<td>-0.021568</td>
-<td>-0.024853</td>
-<td>-0.008091</td>
-<td>0.071894</td>
-<td>0.012955</td>
-<td>...</td>
-<td>-0.023290</td>
-<td>0.034470</td>
-<td>0.012761</td>
-<td>-0.002211</td>
-<td>0.002592</td>
-<td>0.015493</td>
-<td>-0.013838</td>
-<td>0.012577</td>
-<td>0.000843</td>
-<td>-0.004172</td>
 </tr>
 <tr>
 <th>2</th>
@@ -1510,22 +1462,6 @@ Total variance ditangkap: 95.03%
 <td>0.378229</td>
 <td>0.231852</td>
 <td>0.117999</td>
-<td>-0.170445</td>
-<td>0.052484</td>
-<td>0.007270</td>
-<td>0.034071</td>
-<td>0.019426</td>
-<td>...</td>
-<td>0.024990</td>
-<td>-0.000787</td>
-<td>-0.018346</td>
-<td>0.016456</td>
-<td>0.021677</td>
-<td>-0.018534</td>
-<td>0.023291</td>
-<td>-0.050060</td>
-<td>-0.011973</td>
-<td>-0.047943</td>
 </tr>
 <tr>
 <th>3</th>
@@ -1534,22 +1470,6 @@ Total variance ditangkap: 95.03%
 <td>0.421979</td>
 <td>0.274761</td>
 <td>0.234078</td>
-<td>-0.279931</td>
-<td>0.070487</td>
-<td>-0.020129</td>
-<td>-0.043574</td>
-<td>0.025504</td>
-<td>...</td>
-<td>-0.011644</td>
-<td>-0.007181</td>
-<td>0.003332</td>
-<td>-0.008580</td>
-<td>0.009904</td>
-<td>-0.018400</td>
-<td>0.011085</td>
-<td>-0.035997</td>
-<td>-0.028625</td>
-<td>-0.015287</td>
 </tr>
 <tr>
 <th>4</th>
@@ -1558,26 +1478,9 @@ Total variance ditangkap: 95.03%
 <td>-0.061738</td>
 <td>-0.052059</td>
 <td>-0.011983</td>
-<td>-0.056981</td>
-<td>0.004080</td>
-<td>0.005591</td>
-<td>-0.011264</td>
-<td>-0.041397</td>
-<td>...</td>
-<td>0.002525</td>
-<td>-0.022353</td>
-<td>-0.015588</td>
-<td>0.016858</td>
-<td>-0.002304</td>
-<td>0.002811</td>
-<td>-0.004687</td>
-<td>-0.011931</td>
-<td>0.008162</td>
-<td>-0.007872</td>
 </tr>
 </tbody>
 </table>
-<p>5 rows × 170 columns</p>
 </div></div>
 </div>
 </div>
@@ -1643,7 +1546,7 @@ Total variance ditangkap: 95.03%
 <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s2">"tugaspreprocessing.xlsx"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"openpyxl"</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
     <span class="n">mtx</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">"Bag of Words"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tfidf_df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">"TF-IDF"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">pca_df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">"PCA"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">X_low_df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">"PCA"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Output tersimpan: tugaspreprocessing.xlsx (3 sheet: Bag of Words, TF-IDF, PCA)"</span><span class="p">)</span>
 </pre></div>
