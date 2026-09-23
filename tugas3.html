@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modelling Klasifikasi Orange &#8212; Pendat</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="https://abidayyasy.github.io/pendat/_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="https://abidayyasy.github.io/pendat/_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="https://abidayyasy.github.io/pendat/_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="https://abidayyasy.github.io/pendat/_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="https://abidayyasy.github.io/pendat/_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://abidayyasy.github.io/pendat/_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://abidayyasy.github.io/pendat/_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="https://abidayyasy.github.io/pendat/_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="https://abidayyasy.github.io/pendat/_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="https://abidayyasy.github.io/pendat/_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="https://abidayyasy.github.io/pendat/_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="https://abidayyasy.github.io/pendat/_static/doctools.js?v=9a2dae69"></script>
+    <script src="https://abidayyasy.github.io/pendat/_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://abidayyasy.github.io/pendat/_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="https://abidayyasy.github.io/pendat/_static/copybutton.js?v=f281be69"></script>
+    <script src="https://abidayyasy.github.io/pendat/_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="https://abidayyasy.github.io/pendat/_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="https://abidayyasy.github.io/pendat/_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="https://abidayyasy.github.io/pendat/_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tugas3';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Tugas 2 - Preprocessing dan Ekstraksi Fitur" href="preprocessing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+<img src="https://abidayyasy.github.io/pendat/_static/logo.png" class="logo__image only-light" alt="Pendat - Home"/>
+<script>document.write(`<img src="https://abidayyasy.github.io/pendat/_static/logo.png" class="logo__image only-dark" alt="Pendat - Home"/>`);</script>
+
+
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Buku Pencarian dan Penambangan Web
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Bab1.html">BAB 1 - PENGANTAR WEB MINING</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawler.html">Crawler Detik - Praktik Web Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Tugas 2 - Preprocessing dan Ekstraksi Fitur</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelling Klasifikasi Orange</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+
+<div id="searchbox"></div>
+                <article class="bd-article">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=t3-pendahuluan"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Modelling-Klasifikasi-Berita-dengan-Orange-Data-Mining">Modelling Klasifikasi Berita dengan Orange Data Mining<a class="anchor-link" href="#Modelling-Klasifikasi-Berita-dengan-Orange-Data-Mining">&#182;</a></h1><p>Tahap ini melakukan <strong>pemodelan klasifikasi teks berita</strong> ke dalam dua kategori &mdash; <em>Sport</em> dan <em>Finance</em> &mdash; menggunakan aplikasi <strong>Orange Data Mining</strong>. Data masukannya berasal dari hasil preprocessing pada tugas sebelumnya:</p>
+<ul>
+<li><code>tfidf.csv</code> &mdash; matriks TF-IDF berukuran 200 dokumen &times; 7.063 kata.</li>
+<li><code>pca.csv</code> &mdash; data yang sudah direduksi menjadi 169 komponen utama (output PCA pada preprocessing).</li>
+</ul>
+<p>Eksperimen dibagi menjadi dua alur pemodelan: <strong>Alur 1</strong> menguji data TF-IDF yang direduksi langsung di Orange dengan widget <strong>PCA</strong>, sedangkan <strong>Alur 2</strong> memakai data hasil reduksi PCA yang sudah disiapkan sebelumnya sehingga langsung menuju model tanpa widget perantara.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=t3-alur1"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Alur-1-Reduksi-PCA-di-Orange">Alur 1: Reduksi PCA di Orange<a class="anchor-link" href="#Alur-1-Reduksi-PCA-di-Orange">&#182;</a></h2><p>Alur pertama menyusun alur kanvas dari <code>tfidf.csv</code>, mereduksi dimensinya dengan PCA, kemudian menguji dua model klasifikasi. Tampilan kanvasnya sebagai berikut:</p>
+<p><figure class="align-default">
+<img alt="Alur 1 - kanvas Orange" src="alur%201.png" />
+<figcaption><p>Gambar 1. Kanvas alur pemodelan 1 (TF-IDF &rarr; PCA &rarr; Naive Bayes &amp; kNN).</p></figcaption>
+</figure></p>
+<p><strong>Langkah pembuatan node:</strong></p>
+<ol>
+<li><strong>CSV File Import</strong> &mdash; mengimpor file <code>tfidf.csv</code> berisi 200 baris dokumen dan 7.063 kolom fitur kata. Baris pertama berisi nama kolom sehingga otomatis dikenali sebagai header.</li>
+<li><strong>Select Columns</strong> &mdash; mengatur peran tiap kolom: seluruh kolom kata masuk ke <strong>Features</strong>, kolom <code>label</code> ditetapkan sebagai <strong>Target</strong> (kelas <em>Sport</em> / <em>Finance</em>), dan kolom <code>id</code> diletakkan di <strong>Metas</strong> sebagai pelengkap.</li>
+<li><strong>PCA</strong> &mdash; mereduksi ruang vektor ribuan dimensi menjadi komponen utama yang jauh lebih ringkas.</li>
+<li><strong>Naive Bayes &amp; kNN</strong> &mdash; kedua model menerima saluran Data langsung dari node PCA.</li>
+<li><strong>Test and Score</strong> &mdash; menerima saluran <em>Learner</em> dari kedua model serta saluran <em>Data</em> dari PCA, lalu mengevaluasi performanya.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=t3-select"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pengaturan-Select-Columns">Pengaturan Select Columns<a class="anchor-link" href="#Pengaturan-Select-Columns">&#182;</a></h3><p>Widget <strong>Select Columns</strong> dipakai untuk memisahkan peran kolom sebelum diproses oleh PCA dan model:</p>
+<p><figure class="align-default">
+<img alt="Pengaturan Select Columns" src="select%20column.png" />
+<figcaption><p>Gambar 2. Pengaturan kolom target pada widget Select Columns.</p></figcaption>
+</figure></p>
+<ul>
+<li><strong>Target</strong> &mdash; kolom <code>label</code> sebagai kelas yang diprediksi (<em>sport</em> dan <em>finance</em>).</li>
+<li><strong>Features</strong> &mdash; seluruh kolom kata sebagai atribut prediktor.</li>
+<li><strong>Metas</strong> &mdash; kolom <code>id</code> sebagai informasi pelengkap yang tidak ikut dalam perhitungan model.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=t3-pca"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Konfigurasi-PCA">Konfigurasi PCA<a class="anchor-link" href="#Konfigurasi-PCA">&#182;</a></h3><p>Pada widget <strong>PCA</strong>, ambang <em>explained variance</em> diatur agar mayoritas informasi teks tetap terjaga dan opsi <em>normalize variables</em> diaktifkan supaya seluruh fitur distandarisasi skalanya sebelum komponen utama dihitung:</p>
+<p><figure class="align-default">
+<img alt="Pengaturan parameter PCA" src="pca.png" />
+<figcaption><p>Gambar 3. Pengaturan parameter PCA (explained variance 80%, normalize variables aktif).</p></figcaption>
+</figure></p>
+<ul>
+<li><strong>Explained Variance 80%</strong> &mdash; mempertahankan sebanyak mungkin variansi kumulatif korpus teks.</li>
+<li><strong>Normalize variables</strong> &mdash; dicentang agar fitur berskala seragam.</li>
+<li>Karena batas maksimal widget PCA Orange adalah <strong>100 komponen</strong>, jumlah komponen terpilih otomatis menjadi 100 (variansi kumulatif sekitar 67,8%) &mdash; jauh lebih ringkas dibandingkan 7.063 fitur kata awal.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=t3-hasil1"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Hasil-Pengujian-Alur-1">Hasil Pengujian Alur 1<a class="anchor-link" href="#Hasil-Pengujian-Alur-1">&#182;</a></h3><p>Evaluasi memakai widget <strong>Test and Score</strong> dengan metode <em>random sampling</em> (repeat train/test = 10, proporsi latih-uji 66:34 secara stratified):</p>
+<p><figure class="align-default">
+<img alt="Hasil Test and Score Alur 1" src="test%20and%20score%20tfidf.png" />
+<figcaption><p>Gambar 4. Hasil Test and Score alur 1 (TF-IDF &rarr; PCA 100 komponen).</p></figcaption>
+</figure></p>
+<table class="table table-striped table-hover">
+<thead>
+<tr><th>Model</th><th>AUC</th><th>CA (Accuracy)</th><th>F1-Score</th><th>Precision</th><th>Recall</th><th>MCC</th></tr>
+</thead>
+<tbody>
+<tr><td>kNN</td><td>1.000</td><td><strong>0.995</strong> (99.5%)</td><td><strong>0.995</strong></td><td><strong>0.995</strong></td><td><strong>0.995</strong></td><td><strong>0.990</strong></td></tr>
+<tr><td>Naive Bayes</td><td>0.994</td><td><strong>0.975</strong> (97.5%)</td><td><strong>0.975</strong></td><td><strong>0.975</strong></td><td><strong>0.975</strong></td><td><strong>0.950</strong></td></tr>
+</tbody>
+</table>
+<p><strong>Analisis:</strong></p>
+<ul>
+<li><strong>kNN</strong> mencapai akurasi 99.5% dengan AUC sempurna (1.000) &mdash; di ruang proyeksi 100 komponen, dokumen <em>Sport</em> dan <em>Finance</em> sangat mudah dipisahkan oleh tetangga terdekat.</li>
+<li><strong>Naive Bayes</strong> menghasilkan akurasi 97.5% dan MCC 0.950, cukup stabil meskipun pendekatan probabilitasnya bekerja pada ruang berdimensi tinggi.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=t3-alur2"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Alur-2-Data-Reduksi-PCA-dari-Preprocessing">Alur 2: Data Reduksi PCA dari Preprocessing<a class="anchor-link" href="#Alur-2-Data-Reduksi-PCA-dari-Preprocessing">&#182;</a></h2><p>Alur kedua memakai <code>pca.csv</code>, data yang sudah direduksi menjadi 169 komponen utama pada proses preprocessing, sehingga tidak diperlukan widget PCA di dalam kanvas &mdash; model langsung menerima data yang sudah ringkas. Tampilan kanvasnya:</p>
+<p><figure class="align-default">
+<img alt="Alur 2 - kanvas Orange" src="alur%202.png" />
+<figcaption><p>Gambar 5. Kanvas alur pemodelan 2 (data reduksi pca.csv &rarr; Naive Bayes &amp; kNN).</p></figcaption>
+</figure></p>
+<p><strong>Langkah pembuatan node:</strong></p>
+<ol>
+<li><strong>CSV File Import</strong> &mdash; mengimpor <code>pca.csv</code> (200 dokumen &times; 169 komponen + kolom <code>id</code> dan <code>label</code>).</li>
+<li><strong>Select Columns</strong> &mdash; 169 kolom komponen masuk ke <strong>Features</strong>, <code>label</code> sebagai <strong>Target</strong>, dan <code>id</code> sebagai <strong>Metas</strong>.</li>
+<li><strong>Naive Bayes &amp; kNN</strong> &mdash; dihubungkan langsung dari Select Columns tanpa node perantara karena dimensi data sudah tereduksi.</li>
+<li><strong>Test and Score</strong> &mdash; evaluasi dengan parameter <em>random sampling</em> yang identik dengan Alur 1.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=t3-hasil2"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Hasil-Pengujian-Alur-2">Hasil Pengujian Alur 2<a class="anchor-link" href="#Hasil-Pengujian-Alur-2">&#182;</a></h3><p>Hasil evaluasi untuk data reduksi 169 komponen tersebut:</p>
+<p><figure class="align-default">
+<img alt="Hasil Test and Score Alur 2" src="test%20and%20score%20pca.png" />
+<figcaption><p>Gambar 6. Hasil Test and Score alur 2 (pca.csv, 169 komponen).</p></figcaption>
+</figure></p>
+<table class="table table-striped table-hover">
+<thead>
+<tr><th>Model</th><th>AUC</th><th>CA (Accuracy)</th><th>F1-Score</th><th>Precision</th><th>Recall</th><th>MCC</th></tr>
+</thead>
+<tbody>
+<tr><td>kNN</td><td>1.000</td><td><strong>0.995</strong> (99.5%)</td><td><strong>0.995</strong></td><td><strong>0.995</strong></td><td><strong>0.995</strong></td><td><strong>0.990</strong></td></tr>
+<tr><td>Naive Bayes</td><td>0.993</td><td><strong>0.960</strong> (96.0%)</td><td><strong>0.960</strong></td><td><strong>0.960</strong></td><td><strong>0.960</strong></td><td><strong>0.920</strong></td></tr>
+</tbody>
+</table>
+<p><strong>Analisis:</strong></p>
+<ul>
+<li><strong>kNN</strong> kembali menghasilkan akurasi 99.5% dengan AUC 1.000 &mdash; identik dengan Alur 1, karena data yang sangat terpisah membuat pemisahan antar-kelas mudah bagi kNN di kedua representasi.</li>
+<li><strong>Naive Bayes</strong> menghasilkan akurasi 96.0% dan MCC 0.920, sedikit lebih rendah dibanding Alur 1 meskipun jumlah komponennya lebih banyak.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=t3-kesimpulan"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Kesimpulan">Kesimpulan<a class="anchor-link" href="#Kesimpulan">&#182;</a></h2><ol>
+<li><strong>Kedua alur menghasilkan model yang sangat baik</strong> &mdash; akurasi di atas 96% dengan AUC mendekati/mencapai 1.000, artinya kedua representasi (PCA 100 komponen dan data reduksi 169 komponen) sama-sama kuat memisahkan kategori berita <em>Sport</em> dan <em>Finance</em>.</li>
+<li><strong>kNN konsisten lebih unggul</strong> &mdash; akurasi 99.5% dan MCC 0.990 di kedua alur, menunjukkan bahwa data berita ini terstruktur dengan baik untuk jarak antar-tetangga terdekat.</li>
+<li><strong>Naive Bayes unggul pada Alur 1</strong> &mdash; akurasi 97.5% (Alur 1) sedikit lebih tinggi dari 96.0% (Alur 2), sehingga reduksi langsung di Orange tetap efektif untuk model probabilistik.</li>
+<li><strong>Efisiensi dimensi</strong> &mdash; dari 7.063 fitur kata awal, PCA berhasil memangkas menjadi 100 komponen di Alur 1 dengan penurunan performa yang minimal, membuktikan reduksi dimensi tetap aman untuk klasifikasi teks.</li>
+</ol>
+</div>
+</div>
+</div></article>
+          
+
+
+<footer class="prev-next-footer d-print-none">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="preprocessing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tugas 2 - Preprocessing dan Ekstraksi Fitur</p>
+      </div>
+    </a>
+</div>
+</footer>
+
+            </div>
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Muhammad Abid Ayyasy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      &#169; Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="https://abidayyasy.github.io/pendat/_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="https://abidayyasy.github.io/pendat/_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
