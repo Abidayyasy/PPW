@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>BAB 2 - SKIP-GRAM &#8212; Pendat</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="https://abidayyasy.github.io/pendat/_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="https://abidayyasy.github.io/pendat/_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="https://abidayyasy.github.io/pendat/_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="https://abidayyasy.github.io/pendat/_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="https://abidayyasy.github.io/pendat/_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://abidayyasy.github.io/pendat/_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://abidayyasy.github.io/pendat/_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="https://abidayyasy.github.io/pendat/_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="https://abidayyasy.github.io/pendat/_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="https://abidayyasy.github.io/pendat/_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="https://abidayyasy.github.io/pendat/_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="https://abidayyasy.github.io/pendat/_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="https://abidayyasy.github.io/pendat/_static/doctools.js?v=9a2dae69"></script>
+    <script src="https://abidayyasy.github.io/pendat/_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://abidayyasy.github.io/pendat/_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="https://abidayyasy.github.io/pendat/_static/copybutton.js?v=f281be69"></script>
+    <script src="https://abidayyasy.github.io/pendat/_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="https://abidayyasy.github.io/pendat/_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="https://abidayyasy.github.io/pendat/_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="https://abidayyasy.github.io/pendat/_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Bab2';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Tugas 3 - Modelling Klasifikasi Orange" href="tugas3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://abidayyasy.github.io/pendat/_static/logo.png" class="logo__image only-light" alt="Pendat - Home"/>
+    <script>document.write(`<img src="https://abidayyasy.github.io/pendat/_static/logo.png" class="logo__image only-dark" alt="Pendat - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Buku Pencarian dan Penambangan Web
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Bab1.html">BAB 1 - PENGANTAR WEB MINING</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawler.html">Tugas 1 - Crawler Detik Praktik Web Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Tugas 2 - Preprocessing dan Ekstraksi Fitur</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tugas3.html">Tugas 3 - Modelling Klasifikasi Orange</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">BAB 2 - SKIP-GRAM</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FBab1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://abidayyasy.github.io/pendat/_sources/Bab1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>BAB 2 - SKIP-GRAM</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">BAB 2 - SKIP-GRAM</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#masalahnya">1. Masalahnya: Mengapa Cara Lama Tidak Cukup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-skip-gram">2. Apa Itu Skip-Gram</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-kerja-skip-gram">3. Cara Kerja Skip-Gram</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kenapa-pakai-skip-gram">4. Kenapa Pakai Skip-Gram</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+<section id="bab-2-skip-gram">
+<h1>BAB 2 - SKIP-GRAM</h1>
+<p>Bab ini membahas <strong>skip-gram</strong>, yaitu cara mengubah setiap kata menjadi susunan angka yang bisa dihitung komputer, lalu memakainya untuk mengelompokkan berita berdasarkan topiknya. Metode ini menjadi alternatif dari pendekatan frekuensi yang sudah dipakai pada Tugas 2, dan akan digunakan sebagai bahan masukan klasifikasi pada tugas berikutnya.</p>
+</section>
+<section id="masalahnya">
+<h2>1. Masalahnya: Mengapa Cara Lama Tidak Cukup</h2>
+<h3>1.1 Kata Harus Berubah Jadi Angka</h3>
+<p>Setiap algoritma pembelajaran mesin, termasuk Naive Bayes, hanya bisa menghitung angka. Tapi data yang kita miliki adalah teks, yaitu rangkaian kata. Sebelum sebuah berita bisa dimasukkan ke model, teks itu harus diubah lebih dulu menjadi bentuk yang bisa dihitung. Cara mengubahnya itulah yang menentukan seberapa baik model bisa mengenali topik berita tersebut.</p>
+<h3>1.2 Dua Cara Lama: Bag of Words dan TF-IDF</h3>
+<p>Pada Tugas 2, teks berita diubah ke dalam dua bentuk sekaligus. Bentuk pertama adalah <strong>Bag of Words</strong>, yaitu matriks berisi hitungan kemunculan setiap kata pada setiap berita. Bentuk kedua adalah <strong>TF-IDF</strong>, yang memberi bobot lebih besar pada kata yang jarang muncul, dengan asumsi kata yang jarang justru lebih khas.</p>
+<p>Kedua cara ini bekerja, dan hasilnya memang sangat baik. Tetapi keduanya melihat teks dari satu sudut pandang saja, yaitu berapa kali sebuah kata muncul.</p>
+<h3>1.3 Kelemahannya: Hanya Tahu Frekuensi, Bukan Makna</h3>
+<p>Masalahnya, kata yang sering muncul di berita yang berbeda bisa memiliki hubungan yang sama sekali tidak ada. Pada berita-branch-branch tentang harga emas, kata <code>harga</code>, <code>rp</code>, dan <code>emas</code> selalu muncul bersama, sehingga TF-IDF menganggap mereka sangat mirip. Padahal <code>harga</code> dan <code>turun</code> jauh lebih mirip secara makna, karena keduanya sama-sama membahas perubahan nilai, dan dua-duanya sering muncul bersama dalam satu kalimat.</p>
+<p>Akibatnya bisa dilihat dari ukuran datanya. Matriks TF-IDF pada 200 berita Detik menghasilkan <strong>7.063 kolom fitur</strong>, sehingga masih perlu direduksi menjadi <strong>169 komponen utama</strong> lewat PCA agar bisa dihitung. Berita-branch keuangan dan olahraga memang terpisah, tetapi karena pola kemunculan kata, bukan karena maknanya.</p>
+</section>
+<section id="apa-itu-skip-gram">
+<h2>2. Apa Itu Skip-Gram</h2>
+<h3>2.1 Ide Dasar</h3>
+<p>Skip-gram berangkat dari satu pengamatan sederhana: <strong>dua kata yang sering muncul bersama dalam kalimat yang sama cenderung punya makna yang serupa</strong>. Kata <code>emas</code> dan <code>antam</code> selalu bersama di berita tentang logam, kata <code>bola</code> dan <code>liga</code> selalu bersama di berita olahraga, kata <code>saham</code> dan <code>rupiah</code> selalu bersama di berita keuangan.</p>
+<p>Kabar baiknya, tidak perlu kamus, tidak perlu daftar kata, dan tidak perlu tahu siapa yang menulis berita tersebut. Model cukup membaca kumpulan teks berulang kali, lalu menarik sendiri pola mana yang muncul bersama. Makna itu muncul dari data, bukan dari daftar yang ditulis manusia.</p>
+<h3>2.2 Definisi</h3>
+<p>Secara teknis, skip-gram adalah cara melatih model dengan <strong>menebak kata tengah berdasarkan kata-kata di sekitarnya</strong>. Kata yang sedang dijelaskan posisinya disebut <em>center word</em>, sedangkan kata-kata di dekatnya disebut <em>context word</em>. Seberapa jauh kata di sekitar yang masih dianggap terlalu dekat disebut <em>window</em>.</p>
+<p>Jadi arah pekerjaannya terbalik. Alih-alih membaca kata tengah lalu mencari makna dari kata-kata di sekitarnya, model justru diberi kata-kata di sekitarnya, lalu diminta menebak kata tengahnya. Setelah itu dilakukan ribuan kali, vektor yang terbentuk pada akhirnya bisa menangkap makna yang tidak pernah ditulis siapa pun.</p>
+<h3>2.3 Beda dengan CBOW</h3>
+<p>Skip-gram punya satu kembar, yaitu <strong>CBOW</strong> (Continuous Bag of Words). Keduanya menghasilkan vektor kata yang serupa, tetapi arah pekerjaannya berlawanan.</p>
+<table class="table table-striped table-hover">
+<thead>
+<tr><th>Aspek</th><th>CBOW</th><th>Skip-Gram</th></tr>
+</thead>
+<tbody>
+<tr><td>Yang jadi masukan</td><td>Seluruh kata di sekitar sekaligus</td><td>Satu kata di sekitar per giliran</td></tr>
+<tr><td>Yang diprediksi</td><td>Kata tengah</td><td>Kata di sekitar</td></tr>
+<tr><td>Arah</td><td>Dari kata di sekitar ke kata tengah</td><td>Dari kata tengah ke kata di sekitar</td></tr>
+<tr><td>Kuat untuk</td><td>Kata yang sering muncul</td><td>Kata yang jarang dan spesifik</td></tr>
+<tr><td>Untuk korpus kecil</td><td>Hasilnya cenderung buram</td><td>Hasilnya lebih tajam</td></tr>
+</tbody>
+</table>
+<p>Perbedaan yang paling menentukan dalam praktik adalah baris keempat. Pada 200 berita, kata yang sering muncul seperti <code>yang</code> dan <code>di</code> sudah punya banyak contoh, sehingga tidak terlalu sulit dipelajari. Yang justru sulit dan bernilai adalah kata yang jarang, seperti nama perusahaan, nama pemain, atau istilah teknis. Di sinilah skip-gram menang.</p>
+</section>
+<section id="cara-kerja-skip-gram">
+<h2>3. Cara Kerja Skip-Gram</h2>
+<p>Sebelum masuk ke penjelasan, berikut istilah-istilah yang akan dipakai. Nama istilah sengaja ditulis dalam bahasa Inggris supaya tidak membingungkan saat membaca kode atau dokumentasi pustaka.</p>
+<table class="table table-striped table-hover">
+<thead>
+<tr><th>Istilah</th><th>Fungsinya</th></tr>
+</thead>
+<tbody>
+<tr><td><code>center word</code></td><td>Kata yang sedang dijelaskan posisinya di dalam kalimat. Vektornya sedang dipelajari pada saat itu.</td></tr>
+<tr><td><code>context word</code></td><td>Kata-kata di sekitar <code>center word</code>. Inilah yang jadi target tebakan.</td></tr>
+<tr><td><code>window</code></td><td>Batas jauh kata mana yang masih dianggap "di sekitar".</td></tr>
+<tr><td><code>document</code></td><td>Satu berita utuh.</td></tr>
+<tr><td><code>vocabulary</code></td><td>Daftar seluruh kata unik yang ada di kumpulan teks.</td></tr>
+<tr><td><code>vector</code></td><td>Deret angka yang mewakili satu kata.</td></tr>
+<tr><td><code>dimension</code></td><td>Satu sumbu di dalam <code>vector</code>.</td></tr>
+<tr><td><code>embedding</code></td><td><code>vector</code> yang sudah jadi hasil latihan, yaitu bentuk akhir sebuah kata.</td></tr>
+<tr><td><code>negative sampling</code></td><td>Cara membuat contoh jawaban yang salah, supaya model punya bahan untuk belajar.</td></tr>
+<tr><td><code>loss function</code></td><td>Pengukuran seberapa jauh tebakan model dari jawaban yang benar.</td></tr>
+<tr><td><code>softmax</code></td><td>Mengubah skor tebakan menjadi peluang.</td></tr>
+<tr><td><code>epoch</code></td><td>Satu putaran membaca seluruh kumpulan teks.</td></tr>
+<tr><td><code>most similar</code></td><td>Daftar kata yang <code>vector</code>-nya paling dekat dengan satu kata.</td></tr>
+<tr><td><code>mean</code></td><td>Rata-rata.</td></tr>
+</tbody>
+</table>
+<p><b>Contoh <code>window</code>.</b> Ambil satu kalimat dari data, lalu pakai <code>window = 2</code>:</p>
+<pre>harga  emas  antam  turun  rp  per  gram
+        └──────────────┘
+        ini yang dipakai saat memproses "emas"</pre>
+<p>Saat memproses <code>emas</code>, hanya <code>harga</code> (satu kata di kiri) dan <code>antam</code> serta <code>turun</code> (dua kata di kanan) yang dipakai. <code>rp</code> dan <code>per</code> ada di kalimat yang sama, tetapi sudah di luar jangkauan <code>window</code>, sehingga tidak ikut dipakai.</p>
+<p><b>Input.</b> Satu berita, dipecah jadi token:</p>
+<pre>harga emas antam turun rp 17.000 per gram</pre>
+<p><b>Proses.</b> Dengan <code>sg=1</code> dan <code>window=2</code>, tiap token jadi "kata tengah", dikelilingi konteksnya jadi pasangan (input → target):</p>
+<pre>(harga, emas)  (harga, antam)
+(emas, harga)  (emas, antam)  (emas, turun)
+(antam, harga) (antam, emas)  (antam, turun)  (antam, rp)
+(turun, emas)  (turun, antam) (turun, rp)  (turun, per)
+(rp, antam)    (rp, turun)    (rp, per)  (rp, gram)
+(per, turun)   (per, rp)      (per, gram)
+(gram, rp)     (gram, per)</pre>
+<p>Jumlahnya tidak rata per kata: <code>harga</code> cuma dua, <code>antam</code> dan <code>turun</code> sampai empat. Ini yang sering bikin orang mengira <code>window</code> itu jumlah pasti, padahal cuma batas. <code>17.000</code> dibuang karena bukan token. Kalau ada kata yang berdiri sendiri tanpa konteks, seperti <code>gram</code> di ujung kalimat, pasangannya cuma dua saja.</p>
+<p>Semua pasangan itu dilatih berulang sebanyak 50 <code>epoch</code> untuk menyesuaikan matriks vektor, sampai kata yang sering muncul bersama punya vektor yang dekat.</p>
+<p><b>Output 1 &mdash; Vektor Kata.</b> 100 angka per kata, dipotong 4 dimensi biar kelihatan:</p>
+<pre>harga  [ 0.42, -0.11,  0.87, -0.05, ... ]
+emas   [ 0.39, -0.09,  0.83, -0.02, ... ]   &lt;- Dekat ke "harga"
+antam  [ 0.44, -0.14,  0.80, -0.08, ... ]   &lt;- Dekat juga
+turun  [-0.20,  0.65, -0.31,  0.44, ... ]   &lt;- Jauh dari yang atas</pre>
+<p>Perhatikan kolom pertama dan ketiga. <code>harga</code>, <code>emas</code>, dan <code>antam</code> punya angka yang mirip di kolom itu, sedangkan <code>turun</code> tidak. Model tidak pernah disuruh "kolom ketiga itu untuk logam". Dia cuma ditugaskan menebak kata tetangga terus-menerus, sampai pembagian itu muncul sendiri.</p>
+<p>Tiap baris punya 100 angka, sedangkan kalimat tadi cuma punya 7 kata. Itu sebabnya vektor tidak bisa dibaca sebagai arti kata. Yang berguna cuma <strong>kedekatan antar baris</strong>: kalau dua baris angkanya mirip, dua kata itu dianggap punya makna yang mirip.</p>
+<p><b>Output 2 &mdash; Kata yang Paling Mirip.</b></p>
+<pre>most_similar("emas") -&gt; [harga, antam, rupiah, perak, investasi]</pre>
+<p>Ini bukan tebakan, ini pengukuran. Setelah 50 <code>epoch</code> selesai, jarak antara setiap pasang <code>vector</code> dihitung, lalu yang jaraknya paling kecil diambil sepuluh, urutannya dari yang paling dekat. Fungsinya buat ngecek apakah modelnya sudah benar-benar jalan. Kalau yang keluar <code>harga</code>, <code>antam</code>, <code>perak</code>, <code>rupiah</code>, berarti model sudah menangkap bahwa <code>emas</code> itu soal logam dan nilainya. Kalau yang keluar <code>yang</code>, <code>di</code>, <code>itu</code>, berarti korpusnya terlalu kecil dan model cuma belajar mana yang sering muncul.</p>
+<p>Untuk korpus 200 berita, hasilnya tidak akan terlalu jauh berbeda dari yang di atas, tetapi tidak bisa dijamin persis. Karena itu angka di halaman ini diberi label sebagai ilustrasi, bukan hasil latihan sungguhan.</p>
+</section>
+<section id="kenapa-pakai-skip-gram">
+<h2>4. Kenapa Pakai Skip-Gram</h2>
+<h3>4.1 Skip-Gram Lebih Tepat untuk Koleksi Teks Kecil</h3>
+<p>Alasan utamanya adalah kebalikan dari kelemahan corpus kecil. Dengan hanya 200 berita, jumlah contoh untuk setiap kata sangat terbatas, sehingga model yang butuh banyak contoh akan hasilnya buram. CBOW memproyeksikan seluruh kata di sekitar sekaligus, jadi satu contoh kalimat harus cukup untuk mengoreksi banyak vektor sekaligus. Skip-gram memproses satu kata sekitar per giliran, sehingga setiap pasangan hanya menyentuh satu vektor target, dan gerakan yang terjadi lebih kecil tetapi lebih tepat sasaran.</p>
+<p>Selain itu, bahasa Indonesia adalah bahasa berimbuhan. Kata <code>bola</code> bisa muncul sebagai <code>bola</code>, <code>bolanya</code>, <code>dengan bola</code>, atau <code>perbolaan</code>. Karena imbuhan itu ditulis sebagai kata terpisah setelah dipecah, kata yang sebenarnya satu akar akan tersebar jadi beberapa entri berbeda pada <code>vocabulary</code>. Skip-gram lebih tahan terhadap hal ini, sebab yang dicari bukan kesamaan bentuk kata, melainkan pola pemakaian di sekitarnya.</p>
+<h3>4.2 Berapa Dimensi yang Dibutuhkan</h3>
+<p>Jumlah dimensi menentukan seberapa banyak informasi yang bisa ditampung setiap kata. Dimensi bisa dibayangkan sebagai jumlah pertanyaan yang boleh diajukan tentang sebuah kata: tiga dimensi berarti hanya boleh nanya tiga hal, seratus dimensi berarti boleh nanya seratus hal.</p>
+<table class="table table-striped table-hover">
+<thead>
+<tr><th>Hal</th><th>3 dimensi</th><th>100 dimensi</th></tr>
+</thead>
+<tbody>
+<tr><td>Yang ditanyakan</td><td>Hanya yang paling kasar, yaitu sering atau jarang</td><td>Sampai ke detail, seperti logam, nama merek, dan arah perubahan</td></tr>
+<tr><td>Yang terelompok</td><td>Dua gumpalan saja: kata umum dan kata khas</td><td>Kelompok makna, seperti logam, olahraga, dan keuangan</td></tr>
+<tr><td>Hasil untuk berita</td><td>200 berita jadi 2 sampai 3 titik, tidak bisa dipisahkan</td><td>200 berita jadi 200 titik, bisa dihitung jaraknya</td></tr>
+</tbody>
+</table>
+<p>Tapi dimensi berlebihan juga tidak otomatis lebih baik. Ruang 3 dimensi sudah pasti terisi penuh, sedangkan ruang 100 dimensi pada korpus 200 berita mungkin hanya separuh yang terisi, sisanya bising. Yang menentukan adalah cukup atau tidak, bukan sebanyak-banyaknya. Untuk korpus ini, 100 dimensi sudah cukup.</p>
+<h3>4.3 Parameter yang Dipilih dan Alasannya</h3>
+<table class="table table-striped table-hover">
+<thead>
+<tr><th>Parameter</th><th>Nilai</th><th>Alasannya</th></tr>
+</thead>
+<tbody>
+<tr><td><code>vector size</code></td><td>100</td><td>Cukup untuk 200 berita. Pada korpus jutaan dokumen baru perlu 200 sampai 300.</td></tr>
+<tr><td><code>window</code></td><td>5</td><td>Kata yang menjawab soal dalam satu berita umumnya berada dalam lima kata di sekitarnya.</td></tr>
+<tr><td><code>min count</code></td><td>1</td><td>Korpus kecil, jadi tidak ada kata yang dibuang. Pada korpus besar nilainya dinaikkan ke 2 atau 3.</td></tr>
+<tr><td><code>negative sampling</code></td><td>5</td><td>Lima contoh jawaban salah cukup untuk membuat model tidak malas.</td></tr>
+<tr><td><code>sample</code></td><td>0</td><td>Pengurangan kata umum dimatikan, karena pada korpus kecil kata umum justru dibutuhkan sebagai konteks.</td></tr>
+<tr><td><code>epoch</code></td><td>50</td><td>Korpus dibaca 50 kali. Pada korpus besar cukup 5 sampai 20.</td></tr>
+</tbody>
+</table>
+<p>Semua nilai di atas dipilih karena korpusnya kecil, bukan karena umum. Parameter yang cocok untuk skala lain bisa jadi tidak cocok di sini.</p>
+<h3>4.4 Kekuatan dan Keterbatasan</h3>
+<ul>
+<li><b>Makna muncul sendiri:</b> model tidak perlu kamus, tidak perlu label manual, dan tidak perlu siapa pun menuliskan bahwa <code>emas</code> itu logam.</li>
+<li><b>Ukuran fitur jauh lebih kecil:</b> 100 angka menggantikan 7.063 kolom kata, atau 169 komponen PCA. Vektor berita bisa langsung dipakai tanpa PCA sama sekali.</li>
+<li><b>Perbedaan antar topik lebih terlihat:</b> dua berita yang beda tema otomatis jaraknya jauh, karena banyak dimensi isinya berbeda sekaligus.</li>
+<li><b>Ketergantungan pada korpus:</b> dengan 200 berita, jumlah contoh tiap kata sangat sedikit. Vektor yang terbentuk belum tentu merepresentasikan makna kata secara umum, hanya dalam konteks korpus ini.</li>
+<li><b>Jarak tidak selalu benar:</b> dua kata yang maknanya mirip tapi jarang muncul bersama bisa terlihat jauh. Sebaliknya, dua kata yang hanya berbagi satu konteks bisa terlihat dekat.</li>
+<li><b>Kata yang tidak muncul hilang:</b> kata yang tidak pernah ada di korpus tidak akan punya vektor sama sekali, sehingga maknanya tidak tertangkap.</li>
+</ul>
+</section>
+
+</article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tugas3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tugas 3 - Modelling Klasifikasi Orange</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">BAB 2 - SKIP-GRAM</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#masalahnya">1. Masalahnya: Mengapa Cara Lama Tidak Cukup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-skip-gram">2. Apa Itu Skip-Gram</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-kerja-skip-gram">3. Cara Kerja Skip-Gram</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kenapa-pakai-skip-gram">4. Kenapa Pakai Skip-Gram</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Muhammad Abid Ayyasy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="https://abidayyasy.github.io/pendat/_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="https://abidayyasy.github.io/pendat/_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
