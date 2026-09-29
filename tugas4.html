@@ -61,8 +61,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tugas4';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Tugas 1 - Crawler Detik Praktik Web Mining" href="crawler.html" />
-    <link rel="next" title="BAB 2 - SKIP-GRAM" href="Bab2.html" />
+    <link rel="prev" title="BAB 2 - SKIP-GRAM" href="Bab2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -188,10 +187,10 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bab1.html">BAB 1 - PENGANTAR WEB MINING</a></li>
 <li class="toctree-l1"><a class="reference internal" href="crawler.html">Tugas 1 - Crawler Detik Praktik Web Mining</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Tugas 2 - Preprocessing dan Ekstraksi Fitur</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#">Tugas 2 - Preprocessing dan Ekstraksi Fitur</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tugas3.html">Tugas 3 - Modelling Klasifikasi Orange</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 4 - Skip-Gram dan Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bab2.html">BAB 2 - SKIP-GRAM</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 4 - Skip-Gram dan Naive Bayes</a></li>
 </ul>
 
     </div>
@@ -702,7 +701,7 @@ langsung dengan Jalur B.</p>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>A - case folding saja: 60357 token | vocabulary 7489 kata | rata-rata 302 token/berita | vektor berita (200, 100) | 15.8 detik
+<pre>A - case folding saja: 60357 token | vocabulary 7489 kata | rata-rata 302 token/berita | vektor berita (200, 100) | 16.6 detik
 </pre>
 </div>
 </div>
@@ -846,7 +845,7 @@ bentuk tidak baku sudah dirapikan menjadi satu kata.</p>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>B - preprocessing penuh: 44084 token | vocabulary 7266 kata | rata-rata 220 token/berita | vektor berita (200, 100) | 11.7 detik
+<pre>B - preprocessing penuh: 44084 token | vocabulary 7266 kata | rata-rata 220 token/berita | vektor berita (200, 100) | 12.0 detik
 </pre>
 </div>
 </div>
@@ -981,6 +980,117 @@ kata sendiri.</p>
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Tabel A - case folding saja
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_html rendered_html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Proses</th>
+      <th>Lipatan</th>
+      <th>Accuracy</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1-Score</th>
+      <th>Vocabulary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A - case folding saja</td>
+      <td>1</td>
+      <td>0.975</td>
+      <td>0.9762</td>
+      <td>0.975</td>
+      <td>0.9750</td>
+      <td>7489</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A - case folding saja</td>
+      <td>2</td>
+      <td>0.975</td>
+      <td>0.9762</td>
+      <td>0.975</td>
+      <td>0.9750</td>
+      <td>7489</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A - case folding saja</td>
+      <td>3</td>
+      <td>0.975</td>
+      <td>0.9762</td>
+      <td>0.975</td>
+      <td>0.9750</td>
+      <td>7489</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A - case folding saja</td>
+      <td>4</td>
+      <td>0.925</td>
+      <td>0.9348</td>
+      <td>0.925</td>
+      <td>0.9246</td>
+      <td>7489</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A - case folding saja</td>
+      <td>5</td>
+      <td>0.950</td>
+      <td>0.9545</td>
+      <td>0.950</td>
+      <td>0.9499</td>
+      <td>7489</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>A - case folding saja</td>
+      <td>Rata-rata</td>
+      <td>0.960</td>
+      <td>0.9636</td>
+      <td>0.960</td>
+      <td>0.9599</td>
+      <td>7489</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered" id="cell-id=3dc794f3">
 <div class="input">
@@ -992,6 +1102,117 @@ kata sendiri.</p>
 <span class="n">display</span><span class="p">(</span><span class="n">tabel_b</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 </pre></div>
 
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Tabel B - preprocessing penuh
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_html rendered_html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Proses</th>
+      <th>Lipatan</th>
+      <th>Accuracy</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1-Score</th>
+      <th>Vocabulary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>B - preprocessing penuh</td>
+      <td>1</td>
+      <td>1.000</td>
+      <td>1.0000</td>
+      <td>1.000</td>
+      <td>1.0000</td>
+      <td>7266</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B - preprocessing penuh</td>
+      <td>2</td>
+      <td>0.950</td>
+      <td>0.9545</td>
+      <td>0.950</td>
+      <td>0.9499</td>
+      <td>7266</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>B - preprocessing penuh</td>
+      <td>3</td>
+      <td>0.975</td>
+      <td>0.9762</td>
+      <td>0.975</td>
+      <td>0.9750</td>
+      <td>7266</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>B - preprocessing penuh</td>
+      <td>4</td>
+      <td>0.925</td>
+      <td>0.9348</td>
+      <td>0.925</td>
+      <td>0.9246</td>
+      <td>7266</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>B - preprocessing penuh</td>
+      <td>5</td>
+      <td>0.950</td>
+      <td>0.9545</td>
+      <td>0.950</td>
+      <td>0.9499</td>
+      <td>7266</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>B - preprocessing penuh</td>
+      <td>Rata-rata</td>
+      <td>0.960</td>
+      <td>0.9640</td>
+      <td>0.960</td>
+      <td>0.9599</td>
+      <td>7266</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1120,23 +1341,12 @@ Konsistensi antar lipatan:
 
 <footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tugas3.html"
-       title="previous page">
+    <a class="left-prev" href="Bab2.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tugas 3 - Modelling Klasifikasi Orange</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="Bab2.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">BAB 2 - SKIP-GRAM</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
 </footer>
