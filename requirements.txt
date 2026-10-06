@@ -1,0 +1,8 @@
+streamlit
+gensim
+scikit-learn
+pandas
+numpy
+requests
+trafilatura
+beautifulsoup4
