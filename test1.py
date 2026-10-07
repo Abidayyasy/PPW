@@ -234,15 +234,17 @@ def prediksi_teks(teks, bundle):
     proba = clf.predict_proba(vektor)[0]
     hasil = dict(zip(bundle["kelas"], [float(p) for p in proba]))
     urut = sorted(hasil.items(), key=lambda t: -t[1])
+    kata_unik = list(dict.fromkeys(token))
+    kata_unik_oov = list(dict.fromkeys(oov))
     return {
         "label": urut[0][0],
         "keyakinan": urut[0][1],
         "proba": hasil,
-        "jumlah_token": len(token),
+        "jumlah_token": len(kata_unik),
         "token_dikenal": len(dikenal),
         "token_oov": len(oov),
-        "contoh_token": token[:15],
-        "contoh_oov": oov[:10],
+        "contoh_token": kata_unik,
+        "contoh_oov": kata_unik_oov,
     }
 
 
@@ -322,7 +324,7 @@ def halaman():
             label = hasil["label"]
             st.success(f"**{label.upper()}** — kemungkinan {persen(hasil['keyakinan'])}%")
             st.markdown(f"### Hasil prediksi: **{label.upper()}**")
-            for kelas in ["finance", "olahraga"]:
+            for kelas in ["finance", "sport"]:
                 nilai = hasil["proba"].get(kelas, 0.0)
                 tanda = ">>" if kelas == label else "  "
                 st.progress(nilai, text=f"{tanda} {kelas.upper()} — {persen(nilai)}%")
@@ -331,16 +333,30 @@ def halaman():
             if hasil["judul"]:
                 st.subheader(hasil["judul"])
             kolom1, kolom2, kolom3 = st.columns(3)
-            kolom1.metric("Token", hasil["jumlah_token"])
+            kolom1.metric("Kata unik", hasil["jumlah_token"])
             kolom2.metric("Dikenal model", hasil["token_dikenal"])
             kolom3.metric("Di luar vocab", hasil["token_oov"])
 
             with st.expander("Detail proses & isi berita"):
-                st.write("**Token hasil preprocessing (jalur B):**")
-                st.code(" ".join(hasil["contoh_token"]), language=None)
+                st.write("**Kata unik:**")
+                st.dataframe(
+                    pd.DataFrame({
+                        "No.": range(1, len(hasil["contoh_token"]) + 1),
+                        "Kata": hasil["contoh_token"],
+                    }),
+                    hide_index=True,
+                    use_container_width=True,
+                )
                 if hasil["contoh_oov"]:
                     st.write("**Kata di luar vocabulary (diabaikan):**")
-                    st.code(" ".join(hasil["contoh_oov"]), language=None)
+                    st.dataframe(
+                        pd.DataFrame({
+                            "No.": range(1, len(hasil["contoh_oov"]) + 1),
+                            "Kata": hasil["contoh_oov"],
+                        }),
+                        hide_index=True,
+                        use_container_width=True,
+                    )
                 st.write("**Cuplikan berita:**")
                 st.write(hasil["teks"][:600] + ("..." if len(hasil["teks"]) > 600 else ""))
                 st.write(f"**Link sumber:** {hasil['url']}")
@@ -348,7 +364,7 @@ def halaman():
     st.divider()
     st.caption("Persentase adalah keyakinan model Gaussian Naive Bayes terhadap "
                "vektor berita, bukan jaminan kebenaran. Model dilatih dari 200 "
-               "berita detik (100 finance, 100 olahraga).")
+               "berita detik (100 finance, 100 sport).")
 
 
 if __name__ == "__main__":
